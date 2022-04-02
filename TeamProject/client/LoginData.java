@@ -1,6 +1,6 @@
 package client;
 import java.io.Serializable;
-//
+
 public class LoginData implements Serializable 
 {
   // Private data fields for the username and password.
