@@ -43,12 +43,7 @@ public class BoardPanel extends JPanel {
 		add(boardPanel, BorderLayout.CENTER);
 		boardPanel.setLayout(new GridLayout(8, 8, 0, 0));
 			
-			 for (int index = 0; index < 64; index++) {
-		            JButton button = new JButton();
-		            button.setPreferredSize(new Dimension(64, 64));
-		            boardPanel.add(button);
-		        }
-
+		
 
 		//add tiles, named by their coordinates	
 		for(int col = 0;col<8;col++) {
