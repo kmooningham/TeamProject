@@ -1,79 +1,43 @@
 package client;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
 
+import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ClientGUI extends JFrame
 {
-	private JLabel status;
-	private JButton connect;
-	private JButton submit;
-	private JButton stop;
-
-	public ClientGUI(String title)
+	public ClientGUI(String title, int w, int h)
 	{
-		int i = 0;
 		this.setTitle(title);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		//Create status Label and make it red
-		status = new JLabel("Not Connected");
-		status.setForeground(Color.RED);
-
-		//Create north panel for status
-		JPanel north = new JPanel();
-		north.setLayout(new FlowLayout());
-		north.add(status);
-		this.add(north, BorderLayout.NORTH);
-
-		//Create buttons
-		connect = new JButton("Connect");
-		
-		//Add action listener from window builder
-		connect.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				status.setText("Connect Button Pressed");
-			
-			}
-		});
-		
-		submit = new JButton("Submit");
-		
-		submit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				status.setText("Submit Button Pressed");
-			
-			}
-		});
-		
-		
-		stop = new JButton("Stop");
-		
-		stop.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				status.setText("Stop Button Pressed");
-			
-			}
-		});
-		
-
-
-		//Create south panel for buttons, add them
-		JPanel south = new JPanel();
-		south.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		south.add(connect);
-		south.add(submit);
-		south.add(stop);
-		this.add(south, BorderLayout.SOUTH);
-		
-		//Add everything, make visible, set size
 		this.setVisible(true);
-		this.setSize(350, 400);
+		this.setSize(w, h);
+
+		//create the container, which uses a cardLayout to control view
+	    CardLayout cardLayout = new CardLayout();
+	    JPanel container = new JPanel(cardLayout);
+	    
+		//add the container to the center of the window
+	    this.add(container, BorderLayout.CENTER);
+	    
+	    
+	    //add a new view to contain the board
+	    JPanel view1 = new BoardPanel();
+	    container.add(view1, "1");
+	    
+	    //add a new view to contain the login
+	    JPanel view2 = new LoginPanel();
+	    container.add(view2, "2");
+	    
+	    
+	    
+	    
+	    cardLayout.show(container, "2");
+
+		//Add everything, make visible, set size
+		
 
 
 
@@ -89,7 +53,7 @@ public class ClientGUI extends JFrame
 
 	public static void main(String[] args)
 	{
-		new ClientGUI("Checkers ClientGUI");
+		new ClientGUI("Checkers ClientGUI", 800, 800);
 		//new ClientGUI(args[0]); //args[0] represents the title of the GUI
 	}
 
