@@ -15,7 +15,7 @@ public class BoardPanel extends JPanel {
 		add(buttonPanel, BorderLayout.NORTH);
 		
 			//create a new button, add it to the panel, and add the controller as a listener
-			JButton btnNewButton = new JButton("New button");
+			JButton btnNewButton = new JButton("Logout");
 			buttonPanel.add(btnNewButton);
 			btnNewButton.addActionListener(bc);
 			

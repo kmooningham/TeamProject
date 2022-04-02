@@ -26,6 +26,7 @@ public class LoginPanel extends JPanel{
 		JPanel buttonPanel = new JPanel();
 		JButton submitButton = new JButton("Submit");
 		submitButton.addActionListener(lc);
+		
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(lc);
 		buttonPanel.add(submitButton);
