@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.border.BevelBorder;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 public class BoardPanel extends JPanel {
 	public BoardPanel(BoardController bc) {
@@ -31,10 +32,19 @@ public class BoardPanel extends JPanel {
 		JPanel boardPanel = new JPanel();
 		add(boardPanel, BorderLayout.CENTER);
 		boardPanel.setLayout(new GridLayout(8, 8, 0, 0));
+			
+		/*
+			JButton btnNewButton_3 = new JButton("New button");
+			boardPanel.add(btnNewButton_3);
 		
 			JLabel lblBoardGoesIn = new JLabel("Board goes in here");
 			boardPanel.add(lblBoardGoesIn);
-		
+		*/
+			 for (int index = 0; index < 64; index++) {
+		            JButton button = new JButton();
+		            button.setPreferredSize(new Dimension(64, 64));
+		            boardPanel.add(button);
+		        }
 	}
 
 }
