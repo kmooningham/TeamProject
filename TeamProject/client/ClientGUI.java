@@ -36,7 +36,6 @@ public class ClientGUI extends JFrame
 	    container.add(view2, "login");
 	    
 	    
-	    
 	    //start on view 2
 	    cardLayout.show(container, "login");
 

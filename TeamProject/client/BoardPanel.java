@@ -5,7 +5,11 @@ import java.awt.GridLayout;
 import javax.swing.border.BevelBorder;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+<<<<<<< Upstream, based on branch 'master' of https://github.com/kmooningham/TeamProject.git
 import java.awt.Dimension;
+=======
+import java.awt.Color;
+>>>>>>> e772496 Added basic tile functionality
 
 public class BoardPanel extends JPanel {
 	//array to hold tiles
@@ -33,8 +37,10 @@ public class BoardPanel extends JPanel {
 			btnNewButton_2.addActionListener(bc);
 		
 		//panel to hold the board
+		//this panel is added to the center of the boarder layout
 		JPanel boardPanel = new JPanel();
 		add(boardPanel, BorderLayout.CENTER);
+<<<<<<< Upstream, based on branch 'master' of https://github.com/kmooningham/TeamProject.git
 <<<<<<< Upstream, based on branch 'master' of https://github.com/kmooningham/TeamProject.git
 		boardPanel.setLayout(new GridLayout(8, 8, 0, 0));
 			
@@ -42,6 +48,9 @@ public class BoardPanel extends JPanel {
 			JButton btnNewButton_3 = new JButton("New button");
 			boardPanel.add(btnNewButton_3);
 =======
+=======
+		
+>>>>>>> e772496 Added basic tile functionality
 		GridLayout grid = new GridLayout(8,8,0,0);
 		boardPanel.setLayout(grid);
 >>>>>>> 9bd530d Added class for tiles
@@ -58,13 +67,14 @@ public class BoardPanel extends JPanel {
 =======
 
 		//add tiles, named by their coordinates	
-		for(int col = 0;col<7;col++) {
-			for(int row = 0;row<7;row++) {
-				tiles[col][row] = new Tile(boardPanel,col,row);
+		for(int col = 0;col<8;col++) {
+			for(int row = 0;row<8;row++) {
+				tiles[col][row] = new Tile(tiles,boardPanel,col,row);
 				boardPanel.add(tiles[col][row]);
 			}
 		}
-	
+		
+
 			
 >>>>>>> 9bd530d Added class for tiles
 	}
