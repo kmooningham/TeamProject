@@ -31,7 +31,7 @@ public class Tile extends JButton {
 		}
 			
 		this.setBackground(bgColor);
-		
+		//
 		//action listener for when the tile is clicked
 		this.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

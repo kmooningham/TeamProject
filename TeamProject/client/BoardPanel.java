@@ -11,7 +11,7 @@ import java.awt.Dimension;
 
 import java.awt.Color;
 
-
+//
 public class BoardPanel extends JPanel {
 	//array to hold tiles
 	private Tile[][] tiles;
