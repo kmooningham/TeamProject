@@ -3,14 +3,22 @@ package client;
 import javax.swing.*;
 import java.awt.GridLayout;
 import javax.swing.border.BevelBorder;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 
 public class BoardPanel extends JPanel {
 	public BoardPanel() {
-		//setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		setLayout(new BorderLayout(0, 0));
 		
-		setLayout(new GridLayout(8, 8, 4, 4));
+		JLabel lblButtonsGoHere = new JLabel("Buttons go here");
+		add(lblButtonsGoHere, BorderLayout.NORTH);
 		
-		add(new JLabel("This is the board panel"));
+		JPanel panel = new JPanel();
+		add(panel, BorderLayout.CENTER);
+		panel.setLayout(new GridLayout(0, 8, 0, 0));
+		
+		JLabel lblBoardGoesIn = new JLabel("Board goes in here");
+		panel.add(lblBoardGoesIn);
 	
 	}
 
