@@ -24,20 +24,21 @@ public class ClientGUI extends JFrame
 	    
 	    
 	    //add a new view to contain the board
-	    JPanel view1 = new BoardPanel();
-	    container.add(view1, "1");
+	    BoardController bc = new BoardController(container);
+	    JPanel view1 = new BoardPanel(bc);
+	    container.add(view1, "board");
 	    
 	    
 	    //Create the action listener for the login panel
 	    //add a new view to contain the login panel
 	    LoginController lc = new LoginController(container);
 	    JPanel view2 = new LoginPanel(lc);
-	    container.add(view2, "2");
+	    container.add(view2, "login");
 	    
 	    
 	    
 	    //start on view 2
-	    cardLayout.show(container, "2");
+	    cardLayout.show(container, "login");
 
 	}
 
