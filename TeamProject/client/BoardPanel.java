@@ -10,7 +10,7 @@ public class BoardPanel extends JPanel {
 		
 		setLayout(new GridLayout(8, 8, 4, 4));
 		
-		add(new JLabel("Test"));
+		add(new JLabel("This is the board panel"));
 	
 	}
 

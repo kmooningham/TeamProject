@@ -15,7 +15,7 @@ public class ClientGUI extends JFrame
 		this.setVisible(true);
 		this.setSize(w, h);
 
-		//create the container, which uses a cardLayout to control view
+		//create the container, which uses a cardLayout to control which view is selected
 	    CardLayout cardLayout = new CardLayout();
 	    JPanel container = new JPanel(cardLayout);
 	    
@@ -27,27 +27,18 @@ public class ClientGUI extends JFrame
 	    JPanel view1 = new BoardPanel();
 	    container.add(view1, "1");
 	    
-	    //add a new view to contain the login
-	    JPanel view2 = new LoginPanel();
+	    
+	    //Create the action listener for the login panel
+	    //add a new view to contain the login panel
+	    LoginController lc = new LoginController(container);
+	    JPanel view2 = new LoginPanel(lc);
 	    container.add(view2, "2");
 	    
 	    
 	    
-	    
+	    //start on view 2
 	    cardLayout.show(container, "2");
 
-		//Add everything, make visible, set size
-		
-
-
-
-	}
-
-	
-
-	private void setFlowLayout(FlowLayout flowLayout) {
-		// TODO Auto-generated method stub
-		
 	}
 
 
