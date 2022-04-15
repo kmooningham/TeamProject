@@ -3,6 +3,9 @@ package server.database;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
 
 import server.models.Player;
@@ -40,23 +43,20 @@ public class Database {
 		}
 	}
 
-	public Player authenticatePlayer(username, password) {
+	public Player authenticatePlayer(String username, String password) {
 		try {
 			createConnection();
 
 			PreparedStatement stmt = connection.prepareStatement("SELECT id, username, wins FROM players WHERE username = ? AND password = ?");
-			stmt.setString(1, data.getUsername());
-			stmt.setString(2, data.getPassword());
+			stmt.setString(1, username);
+			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) { // if no player with username/password combo exists, this will be false
 				Player p = new Player();
-				p.setUsername(data.getUsername());
+				p.setUsername(username);
 				p.setId(rs.getInt(1));
-				p.setXp(rs.getInt(2));
 				p.setWins(rs.getInt(3));
-				p.setLosses(rs.getInt(4));
-				p.setClient(client);
 				return p;
 			}
 		} catch (SQLException throwables) {
