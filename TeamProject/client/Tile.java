@@ -12,7 +12,8 @@ public class Tile extends JButton {
 	private Tile[][] tiles;
 	private Color bgColor;
 	private String piece;
-	private Tile selected;
+	private Tile selected; //selected needs to be a reference
+		
 	
 	Tile(Tile[][] tiles, JPanel panel, int row, int col) {
 		//set name to coords
@@ -63,7 +64,6 @@ public class Tile extends JButton {
 		if (this.bgColor == Color.BLACK) {
 			this.addActionListener(new TileController(tiles, this));
 		}
-
 	}
 	
 	public Color getBgColor() {
@@ -96,9 +96,14 @@ public class Tile extends JButton {
 	public void deselect() {
 		selected = null;
 	}
+	
+	public void select(Tile t) {
+		selected = t;
+	}
+	
 	public void select() {
 		selected = this;
-		System.out.println("Selected = (" + selected.getRow() + "," + selected.getCol());
+		//System.out.println("Selected = (" + selected.getRow() + "," + selected.getCol());
 	}
 	
 	public Tile getSelected() {
