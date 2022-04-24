@@ -11,6 +11,7 @@ public class Tile extends JButton {
 	private JPanel panel;
 	private Tile[][] tiles;
 	private Color bgColor;
+	private String piece;
 	
 	Tile(Tile[][] tiles, JPanel panel, int col, int row) {
 		//set name to coords
@@ -20,6 +21,8 @@ public class Tile extends JButton {
 		this.panel = panel;
 		this.col = col;
 		this.row = row;
+		this.piece = null;
+		this.setFont(new Font("Serif", Font.PLAIN, 40));
 		
 		//icon location
 		ImageIcon icon = new ImageIcon("checker.png");
@@ -40,6 +43,21 @@ public class Tile extends JButton {
 		}
 			
 		this.setBackground(bgColor);
+		
+		if(this.bgColor == Color.BLACK && this.row != 4 && this.row != 3) {
+			if(this.row > 3) {
+				this.piece = "Red";
+				this.setText("♟");
+			} else {
+				
+				this.piece = "White";
+				this.setText("♙");
+			}
+		}
+		
+		
+		
+		
 		//
 		//action listener for when the tile is clicked
 		
@@ -47,31 +65,17 @@ public class Tile extends JButton {
 			public void actionPerformed(ActionEvent e) {
 				
 				//example of functionality, set icon to piece texture when clicked
-				tiles[col][row].setIcon(scaledIcon);
+				System.out.println(tiles[col][row].piece);
 				
 				//example of action listener functionality, color diagonal tiles blue when clicked
-				for(int col = 0;col<8;col++) {
-					for(int row = 0;row<8;row++) {
+				for(int row = 0;row<8;row++) {
+					for(int col = 0;col<8;col++) {
+					
 						tiles[col][row].setBackground(tiles[col][row].getBgColor());
 					}
 				}
 				
-				try {
-					tiles[col+1][row+1].setBackground(Color.BLUE);
-				} catch (ArrayIndexOutOfBoundsException error) {}
-				
-				try {
-					tiles[col+1][row-1].setBackground(Color.BLUE);
-				} catch (ArrayIndexOutOfBoundsException error) {}
-				
-				try {
-					tiles[col-1][row+1].setBackground(Color.BLUE);
-				} catch (ArrayIndexOutOfBoundsException error) {}
-				
-				try {
-					tiles[col-1][row-1].setBackground(Color.BLUE);
-				} catch (ArrayIndexOutOfBoundsException error) {}
-				
+
 				
 			}
 		});
