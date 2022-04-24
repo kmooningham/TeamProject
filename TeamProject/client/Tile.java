@@ -13,15 +13,15 @@ public class Tile extends JButton {
 	private Color bgColor;
 	private String piece;
 	
-	Tile(Tile[][] tiles, JPanel panel, int col, int row) {
+	Tile(Tile[][] tiles, JPanel panel, int row, int col) {
 		//set name to coords
-		//super(Integer.toString(col) + "," +  row);
+		//super(Integer.toString(row) + "," +  col);
 		
-		
+		this.tiles = tiles;
 		this.panel = panel;
 		this.col = col;
 		this.row = row;
-		this.piece = null;
+		this.piece = "Blank";
 		this.setFont(new Font("Serif", Font.PLAIN, 40));
 		
 		//icon location
@@ -47,38 +47,18 @@ public class Tile extends JButton {
 		if(this.bgColor == Color.BLACK && this.row != 4 && this.row != 3) {
 			if(this.row > 3) {
 				this.piece = "Red";
-				this.setText("♟");
+				this.setText("♙");
 			} else {
 				
 				this.piece = "White";
-				this.setText("♙");
+				this.setText("♟");
+				
 			}
 		}
 		
-		
-		
-		
-		//
-		//action listener for when the tile is clicked
-		
-		this.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				//example of functionality, set icon to piece texture when clicked
-				System.out.println(tiles[col][row].piece);
-				
-				//example of action listener functionality, color diagonal tiles blue when clicked
-				for(int row = 0;row<8;row++) {
-					for(int col = 0;col<8;col++) {
-					
-						tiles[col][row].setBackground(tiles[col][row].getBgColor());
-					}
-				}
-				
+		//action listener for when the tile is clicked		
+		this.addActionListener(new TileController(tiles, this));
 
-				
-			}
-		});
 
 	}
 	
@@ -86,8 +66,57 @@ public class Tile extends JButton {
 		return bgColor;
 	}
 
-	//public void paint(Graphics g) {
-	//	Graphics2D g2d = (Graphics2D) g;
-	//	g2d.drawOval(0, 0, 10, 10);
-	//}
+	public int getRow() {
+		return this.row;
+	}
+	
+	public int getCol() {
+		return this.col;
+	}
+	
+	public String getPiece() {
+		return this.piece;
+	}
+	
+	public void setPiece(String piece) {
+		this.piece = piece;		
+	}
+	
+	public boolean doesOwn(/*TODO: some client data here*/) {
+		//if client data is the same as current piece color, then that client can control the chosen tile
+		return true;
+	}
+	
+	public boolean canJump(String direction) { //if diagonal tile contains a different piece and next diagonal tile is blank
+		if (direction.equals("NW")) { //-,-
+			if(row < 2 || col < 2) {
+				return false;
+			} else {
+				return !tiles[row-1][col-1].getPiece().equals(this.piece) & tiles[row-2][col-2].getPiece().equals("Blank");
+			}
+			
+		} else if (direction.equals("NE")) { //-,+
+			if(row < 2 || col > 5) {
+				return false;
+			} else {
+				return !tiles[row-1][col+1].getPiece().equals(this.piece) & tiles[row-2][col+2].getPiece().equals("Blank");
+			}
+			
+		} else if (direction.equals("SW")) {
+			if(row > 5 || col < 2) {
+				return false;
+			} else {
+				return !tiles[row+1][col-1].getPiece().equals(this.piece) & tiles[row+2][col-2].getPiece().equals("Blank");
+			}
+			
+		} else if (direction.equals("SE")) {	
+			if(row > 5 || col > 5) {
+				return false;
+			} else {
+				return !tiles[row+1][col+1].getPiece().equals(this.piece) & tiles[row+2][col+2].getPiece().equals("Blank");
+			}
+		} else {
+			return false;
+		}
+	}
 }

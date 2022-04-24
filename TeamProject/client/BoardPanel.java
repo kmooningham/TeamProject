@@ -45,11 +45,11 @@ public class BoardPanel extends JPanel {
 			
 		
 
-		//add tiles, named by their coordinates	
+		//add tiles, named by their coordinates
 		for(int row = 0;row<8;row++) {
-			for(int col = 0;col<8;col++) {			
-				tiles[col][row] = new Tile(tiles,boardPanel,col,row);
-				boardPanel.add(tiles[col][row]);
+			for(int col = 0;col<8;col++) {						
+				tiles[row][col] = new Tile(tiles,boardPanel,row,col);
+				boardPanel.add(tiles[row][col]);
 			}
 		}
 		
