@@ -12,11 +12,13 @@ public class Tile extends JButton {
 	private Tile[][] tiles;
 	private Color bgColor;
 	private String piece;
+	private Tile selected;
 	
 	Tile(Tile[][] tiles, JPanel panel, int row, int col) {
 		//set name to coords
 		//super(Integer.toString(row) + "," +  col);
 		
+		this.selected = null;
 		this.tiles = tiles;
 		this.panel = panel;
 		this.col = col;
@@ -56,9 +58,11 @@ public class Tile extends JButton {
 			}
 		}
 		
-		//action listener for when the tile is clicked		
-		this.addActionListener(new TileController(tiles, this));
-
+		//action listener for when the tile is clicked	
+		//game stuff only happens on black tiles
+		if (this.bgColor == Color.BLACK) {
+			this.addActionListener(new TileController(tiles, this));
+		}
 
 	}
 	
@@ -82,38 +86,115 @@ public class Tile extends JButton {
 		this.piece = piece;		
 	}
 	
+
+	
 	public boolean doesOwn(/*TODO: some client data here*/) {
 		//if client data is the same as current piece color, then that client can control the chosen tile
 		return true;
 	}
 	
+	public void deselect() {
+		selected = null;
+	}
+	public void select() {
+		selected = this;
+		System.out.println("Selected = (" + selected.getRow() + "," + selected.getCol());
+	}
+	
+	public Tile getSelected() {
+		return selected;
+	}
+	
+	public boolean canMove(Tile to) {
+		if(
+			to.getPiece() == "Blank"
+			&& Math.abs(to.getCol() - col) == 1
+			&& Math.abs(to.getRow() - row) == 1
+			) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean canMove(String direction) {
+		if (direction.equals("NW")) { //-,-
+			if(row < 1 || col < 1) {
+				return false;
+			} else {
+				return tiles[row-1][col-1].getPiece().equals("Blank");
+			}
+			
+		} else if (direction.equals("NE")) { //-,+
+			if(row < 1 || col > 5) {
+				return false;
+			} else {
+				return tiles[row-1][col+1].getPiece().equals("Blank");
+			}
+			
+		} else if (direction.equals("SW")) {
+			if(row > 6 || col < 1) {
+				return false;
+			} else {
+				return tiles[row+1][col-1].getPiece().equals("Blank");
+			}
+			
+		} else if (direction.equals("SE")) {	
+			if(row > 6 || col > 6) {
+				return false;
+			} else {
+				return tiles[row+1][col+1].getPiece().equals("Blank");
+			}
+		} else {
+			return false;
+		}
+	}
+	
 	public boolean canJump(String direction) { //if diagonal tile contains a different piece and next diagonal tile is blank
+
+		
 		if (direction.equals("NW")) { //-,-
 			if(row < 2 || col < 2) {
 				return false;
 			} else {
-				return !tiles[row-1][col-1].getPiece().equals(this.piece) & tiles[row-2][col-2].getPiece().equals("Blank");
+				return (
+						!tiles[row-1][col-1].getPiece().equals(this.piece) 
+						&& !tiles[row-1][col-1].getPiece().equals("Blank") 
+						&& tiles[row-2][col-2].getPiece().equals("Blank")
+						);
 			}
 			
 		} else if (direction.equals("NE")) { //-,+
 			if(row < 2 || col > 5) {
 				return false;
 			} else {
-				return !tiles[row-1][col+1].getPiece().equals(this.piece) & tiles[row-2][col+2].getPiece().equals("Blank");
+				return (
+						!tiles[row-1][col+1].getPiece().equals(this.piece) 
+						&& !tiles[row-1][col+1].getPiece().equals("Blank")
+						&& tiles[row-2][col+2].getPiece().equals("Blank")
+						);
 			}
 			
 		} else if (direction.equals("SW")) {
 			if(row > 5 || col < 2) {
 				return false;
 			} else {
-				return !tiles[row+1][col-1].getPiece().equals(this.piece) & tiles[row+2][col-2].getPiece().equals("Blank");
+				return (
+						!tiles[row+1][col-1].getPiece().equals(this.piece) 
+						&& !tiles[row+1][col-1].getPiece().equals("Blank")
+						&& tiles[row+2][col-2].getPiece().equals("Blank")
+						);
 			}
 			
 		} else if (direction.equals("SE")) {	
 			if(row > 5 || col > 5) {
 				return false;
 			} else {
-				return !tiles[row+1][col+1].getPiece().equals(this.piece) & tiles[row+2][col+2].getPiece().equals("Blank");
+				return (
+						!tiles[row+1][col+1].getPiece().equals(this.piece)
+						&& !tiles[row+1][col+1].getPiece().equals("Blank")
+						&& tiles[row+2][col+2].getPiece().equals("Blank")
+						);
 			}
 		} else {
 			return false;
