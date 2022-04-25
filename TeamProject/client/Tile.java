@@ -15,11 +15,11 @@ public class Tile extends JButton {
 	private Tile selected; //selected needs to be a reference
 		
 	
-	Tile(Tile[][] tiles, JPanel panel, int row, int col) {
+	Tile(Tile[][] tiles, Tile selected, JPanel panel, int row, int col) {
 		//set name to coords
 		//super(Integer.toString(row) + "," +  col);
 		
-		this.selected = null;
+		this.selected = selected;
 		this.tiles = tiles;
 		this.panel = panel;
 		this.col = col;
@@ -62,7 +62,7 @@ public class Tile extends JButton {
 		//action listener for when the tile is clicked	
 		//game stuff only happens on black tiles
 		if (this.bgColor == Color.BLACK) {
-			this.addActionListener(new TileController(tiles, this));
+			this.addActionListener(new TileController(tiles, this, selected));
 		}
 	}
 	
@@ -131,7 +131,7 @@ public class Tile extends JButton {
 			}
 			
 		} else if (direction.equals("NE")) { //-,+
-			if(row < 1 || col > 5) {
+			if(row < 1 || col > 6) {
 				return false;
 			} else {
 				return tiles[row-1][col+1].getPiece().equals("Blank");
