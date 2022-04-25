@@ -44,12 +44,14 @@ public class BoardPanel extends JPanel {
 		boardPanel.setLayout(new GridLayout(8, 8, 0, 0));
 			
 		
-
-		//add tiles, named by their coordinates	
-		for(int col = 0;col<8;col++) {
-			for(int row = 0;row<8;row++) {
-				tiles[col][row] = new Tile(tiles,boardPanel,col,row);
-				boardPanel.add(tiles[col][row]);
+		Tile selected = null;
+		
+		
+		//add tiles, named by their coordinates
+		for(int row = 0;row<8;row++) {
+			for(int col = 0;col<8;col++) {						
+				tiles[row][col] = new Tile(tiles,selected, boardPanel,row,col);
+				boardPanel.add(tiles[row][col]);
 			}
 		}
 		
