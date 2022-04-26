@@ -12,7 +12,11 @@
 /Tile.class
 /Tile$1.class
 /Tile$2.class
+<<<<<<< HEAD
 /TileTest.class
 /BoardPanelTest.class
 /BoardControllerTest.class
+=======
+/LoginData.class
+>>>>>>> branch 'master' of https://github.com/kmooningham/TeamProject.git
 /TileController.class
